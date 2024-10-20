@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Resume() {
-  const resumeUrl = "/dsf.pdf"; // Update the path if necessary
+  const resumeUrl = "./dsf.pdf"; // Update the path if necessary
 
   const handleDownload = () => {
     const link = document.createElement("a");
