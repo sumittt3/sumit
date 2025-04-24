@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 
 export default function Project() {
   const [projects, setProjects] = useState([]);
-  const githubUsername = "sumitThakur1600"; // Your GitHub username
+  const githubUsername = "THAKURSUMIT1600"; // Your GitHub username
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          `https://api.github.com/users/${githubUsername}/repos`
+          `https://api.github.com/users/${githubUsername}/starred`
         );
         const data = await response.json();
         setProjects(data);
