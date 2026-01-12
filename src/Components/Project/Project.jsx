@@ -111,7 +111,7 @@ export default function Project() {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          `https://api.github.com/users/${githubUsername}/repos`
+          `https://api.github.com/users/${githubUsername}/starred`
         );
         const data = await response.json();
         setProjects(data);
