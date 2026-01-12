@@ -1,148 +1,163 @@
-import {Link} from "react-router-dom";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { useTheme } from "../../Layout";
 
 export default function Footer() {
+  const { theme } = useTheme();
+  const themeClasses = {
+    dark: {
+      bg: 'bg-black',
+      border: 'border-gray-700',
+      text: 'text-white',
+      textSecondary: 'text-gray-400',
+      hover: 'hover:text-white'
+    },
+    light: {
+      bg: 'bg-white',
+      border: 'border-gray-200',
+      text: 'text-gray-900',
+      textSecondary: 'text-gray-600',
+      hover: 'hover:text-blue-600'
+    }
+  };
+
   return (
-    <footer className="bg-gray-50 border-t mt-10">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <footer className={`${themeClasses[theme].bg} ${themeClasses[theme].border} border-t py-12`}>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <Link to="/" className="flex items-center">
-              <span className="self-center text-3xl font-bold text-gray-800 transition duration-300 hover:text-orange-600">
-                Sumit Thakur
-              </span>
-            </Link>
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              className={`self-center text-3xl font-bold ${themeClasses[theme].text} transition duration-300`}
+            >
+              Sumit
+            </motion.span>
+            <p className={`${themeClasses[theme].textSecondary} mt-2`}>Building Stuff on the Internet</p>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-4 text-lg font-semibold text-gray-900 uppercase tracking-wide">
-                Resources
+              <h2 className={`mb-4 text-lg font-semibold ${themeClasses[theme].text} uppercase tracking-wide`}>
+                Navigate
               </h2>
-              <ul className="text-gray-600">
-                <li className="mb-2">
-                  <Link
-                    to="/"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
-                  >
-                    Home
-                  </Link>
-                </li>
+              <ul className={`${themeClasses[theme].textSecondary} space-y-2`}>
                 <li>
-                  <Link
-                    to="/about"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
+                  <button
+                    onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
                   >
                     About
-                  </Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })}
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
+                  >
+                    Skills
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
+                  >
+                    Projects
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => document.getElementById('experience').scrollIntoView({ behavior: 'smooth' })}
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
+                  >
+                    Experience
+                  </button>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-4 text-lg font-semibold text-gray-900 uppercase tracking-wide">
-                Follow me
+              <h2 className={`mb-4 text-lg font-semibold ${themeClasses[theme].text} uppercase tracking-wide`}>
+                Connect
               </h2>
-              <ul className="text-gray-600">
-                <li className="mb-2">
+              <ul className={`${themeClasses[theme].textSecondary} space-y-2`}>
+                <li>
                   <a
-                    href="https://github.com/sumitThakur1600"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
+                    href="https://github.com/THAKURSUMIT1600"
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1 flex items-center`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Github
+                    <Github className="w-4 h-4 mr-2" />
+                    GitHub
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://discord.com"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
+                    href="https://www.linkedin.com/in/sumit-thakurr3/"
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1 flex items-center`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Discord
+                    <Linkedin className="w-4 h-4 mr-2" />
+                    LinkedIn
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-4 text-lg font-semibold text-gray-900 uppercase tracking-wide">
-                Legal
+              <h2 className={`mb-4 text-lg font-semibold ${themeClasses[theme].text} uppercase tracking-wide`}>
+                Contact
               </h2>
-              <ul className="text-gray-600">
-                <li className="mb-2">
-                  <Link
-                    to="#"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
+              <ul className={`${themeClasses[theme].textSecondary} space-y-2`}>
+                <li>
+                  <a
+                    href="mailto:sumitthakur1600@gmail.com"
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1 flex items-center`}
                   >
-                    Privacy Policy
-                  </Link>
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="#"
-                    className="hover:underline hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
+                  <button
+                    onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                    className={`${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
                   >
-                    Terms &amp; Conditions
-                  </Link>
+                    Get In Touch
+                  </button>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+        <hr className={`my-8 ${themeClasses[theme].border}`} />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center">
-            © 2023{" "}
-            <a href="" className="hover:underline">
-              Sumit Thakur
-            </a>
-            . All Rights Reserved.
+          <span className={`text-sm ${themeClasses[theme].textSecondary} sm:text-center`}>
+            © 2026 Sumit. All Rights Reserved.
           </span>
-          <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
-            <Link
-              to="#"
-              className="text-gray-500 hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
-            >
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+          <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0 items-center">
+            <span className={`${themeClasses[theme].textSecondary} text-sm flex items-center`}>
+              Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by Sumit
+            </span>
+            <div className="flex space-x-4">
+              <a
+                href="https://github.com/THAKURSUMIT1600"
+                className={`${themeClasses[theme].textSecondary} ${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
+                target="_blank"
+                rel="noreferrer"
               >
-                <path d="M22 12h-2v10h-4V12h-2V9h2V7c0-2.21 1.79-4 4-4h2v3h-2c-.55 0-1 .45-1 1v2h3l-1 3z" />
-              </svg>
-              <span className="sr-only">Facebook page</span>
-            </Link>
-            <Link
-              to="#"
-              className="text-gray-500 hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
-            >
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+                <Github className="w-5 h-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sumit-thakurr3/"
+                className={`${themeClasses[theme].textSecondary} ${themeClasses[theme].hover} transition duration-300 transform hover:-translate-y-1`}
+                target="_blank"
+                rel="noreferrer"
               >
-                <path d="M12 .3C5.5.3.3 5.6.3 12c0 6.5 5.2 11.7 11.7 11.7 6.5 0 11.7-5.2 11.7-11.7 0-6.5-5.2-11.7-11.7-11.7zm-.2 20c-1.7 0-3.3-.4-4.8-1.2 2-1.2 3.7-2.8 5.4-4.5.6-.6 1.1-1.3 1.6-2-.6-.5-1.2-1-1.8-1.5-.6-.5-1.2-1.1-1.8-1.7-.3.2-.7.5-1 .6-.3.2-.6.5-.9.7-1.2.7-2.6 1-3.9 1.2.1.6.2 1.3.3 1.9.6-.3 1.2-.5 1.8-.6.6 0 1.3.2 1.9.4-1.3.9-3.1 1.5-5 1.6-.3 0-.6-.1-.9-.1 1.2.9 2.7 1.4 4.3 1.5 1.3.1 2.5.2 3.8-.1.2-.1.4-.2.6-.3.2-.2.3-.5.3-.8z" />
-              </svg>
-              <span className="sr-only">Discord community</span>
-            </Link>
-            <Link
-              to="#"
-              className="text-gray-500 hover:text-orange-600 transition duration-300 transform hover:-translate-y-1"
-            >
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23.3 4.1c-.8.4-1.6.7-2.5.8.9-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-.8-.8-1.9-1.3-3.1-1.3-2.4 0-4.3 1.9-4.3 4.3 0 .3 0 .5.1.7-3.6-.2-6.8-1.9-9-4.5-.4.7-.6 1.5-.6 2.3 0 1.6.8 3 2 3.9-.7 0-1.4-.2-2.1-.5 0 0 0 0 0 .1 0 2.3 1.6 4.3 3.8 4.8-.4.1-.8.2-1.3.2-.3 0-.7 0-1 0 .7 2.1 2.8 3.7 5.3 3.7-1.9 1.5-4.3 2.5-6.9 2.5-.4 0-.7 0-1.1-.1 2.5 1.6 5.4 2.6 8.5 2.6 10.2 0 15.8-8.5 15.8-15.8 0-.2 0-.5 0-.7 1.1-.8 2.1-1.8 2.9-2.9-.9.4-1.8.7-2.8.9z" />
-              </svg>
-              <span className="sr-only">Twitter</span>
-            </Link>
+                <Linkedin className="w-5 h-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

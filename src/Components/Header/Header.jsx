@@ -1,117 +1,141 @@
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsOpen(false);
+  };
 
   return (
-    <header className="shadow-lg sticky z-50 top-0 bg-white">
-      <nav className="border-gray-200 px-4 lg:px-6 py-6 transition duration-300 ease-in-out">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-gray-700 shadow-lg"
+    >
+      <nav className="px-4 lg:px-6 py-4">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
-            <span className="self-center text-3xl font-bold text-gray-800 transition duration-300 transform hover:scale-105">
-              Sumit Thakur
-            </span>
-          </Link>
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-800 hover:text-orange-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-110"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </button>
-          </div>
-          {/* Desktop Menu */}
-          <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } lg:flex lg:items-center lg:space-x-6 lg:w-auto w-full mt-4 lg:mt-0`}
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="flex items-center"
           >
-            <ul className="flex flex-col lg:flex-row items-center lg:space-x-6 space-y-4 lg:space-y-0">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              className="self-center text-2xl font-bold text-white transition duration-300"
+            >
+              Sumit
+            </motion.span>
+          </button>
+          <div className="hidden lg:flex lg:order-2">
+            <ul className="flex space-x-8">
               <li>
-                <NavLink
-                  to=""
-                  className={({ isActive }) =>
-                    `text-gray-800 hover:text-orange-600 font-medium py-2 px-4 transition duration-300 ease-in-out ${
-                      isActive ? "border-b-2 border-orange-600" : ""
-                    }`
-                  }
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    `text-gray-800 hover:text-orange-600 font-medium py-2 px-4 transition duration-300 ease-in-out ${
-                      isActive ? "border-b-2 border-orange-600" : ""
-                    }`
-                  }
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 ease-in-out border-b-2 border-transparent hover:border-white"
                 >
                   About
-                </NavLink>
+                </button>
               </li>
               <li>
-                <NavLink
-                  to="/projects"
-                  className={({ isActive }) =>
-                    `text-gray-800 hover:text-orange-600 font-medium py-2 px-4 transition duration-300 ease-in-out ${
-                      isActive ? "border-b-2 border-orange-600" : ""
-                    }`
-                  }
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Projects
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/skills"
-                  className={({ isActive }) =>
-                    `text-gray-800 hover:text-orange-600 font-medium py-2 px-4 transition duration-300 ease-in-out ${
-                      isActive ? "border-b-2 border-orange-600" : ""
-                    }`
-                  }
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  onClick={() => scrollToSection('skills')}
+                  className="text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 ease-in-out border-b-2 border-transparent hover:border-white"
                 >
                   Skills
-                </NavLink>
+                </button>
               </li>
               <li>
-                <NavLink
-                  to="/resume"
-                  className={({ isActive }) =>
-                    `text-gray-800 hover:text-orange-600 font-medium py-2 px-4 transition duration-300 ease-in-out ${
-                      isActive ? "border-b-2 border-orange-600" : ""
-                    }`
-                  }
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 ease-in-out border-b-2 border-transparent hover:border-white"
                 >
-                  Resume
-                </NavLink>
+                  Projects
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('experience')}
+                  className="text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 ease-in-out border-b-2 border-transparent hover:border-white"
+                >
+                  Experience
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="bg-white text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-medium"
+                >
+                  Contact
+                </button>
               </li>
             </ul>
           </div>
+          <div className="lg:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white hover:text-gray-300 focus:outline-none transition duration-300"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden mt-4 bg-gray-900/95 backdrop-blur-lg rounded-lg p-4 border border-gray-700"
+          >
+            <ul className="space-y-4">
+              <li>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="block text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 w-full text-left"
+                >
+                  About
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('skills')}
+                  className="block text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 w-full text-left"
+                >
+                  Skills
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="block text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 w-full text-left"
+                >
+                  Projects
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('experience')}
+                  className="block text-gray-300 hover:text-white font-medium py-2 px-4 transition duration-300 w-full text-left"
+                >
+                  Experience
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="block bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-medium w-full text-left"
+                >
+                  Contact
+                </button>
+              </li>
+            </ul>
+          </motion.div>
+        )}
       </nav>
-    </header>
+    </motion.header>
   );
 }
 

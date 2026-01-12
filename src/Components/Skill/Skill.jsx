@@ -1,93 +1,90 @@
 import React from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Code,
+  Database,
+  Server,
+  Palette,
+  GitBranch,
+  FileText,
+  Zap,
+  Globe
+} from "lucide-react";
 
-// SkillBar component to display skills with descriptions
-const SkillBar = ({skill, description}) => {
+const SkillCard = ({ skill, icon: Icon, index }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm">
-      <h3 className="font-semibold text-lg text-gray-800">{skill}</h3>
-      <p className="text-gray-600">{description}</p>
-    </div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ scale: 1.1, y: -5 }}
+      className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-lg hover:border-orange-400/50 transition-all duration-300 group"
+    >
+      <div className="flex flex-col items-center text-center">
+        <Icon className="w-12 h-12 text-orange-400 mb-3 group-hover:text-orange-300 transition-colors" />
+        <h3 className="text-white font-medium text-sm">{skill}</h3>
+      </div>
+    </motion.div>
   );
 };
 
 export default function Skill() {
-  // Skills with descriptions in the specified order
   const skills = [
-    {
-      name: "C",
-      description:
-        "Learning C provided a strong foundation in programming concepts. Understanding memory management and pointers has been crucial in my development journey and problem-solving endeavors.",
-    },
-    {
-      name: "C++ (DSA)",
-      description:
-        "I delved into C++ to master data structures and algorithms. Online problem-solving platforms have sharpened my skills, fostering a love for logical thinking and coding challenges.",
-    },
-    {
-      name: "HTML",
-      description:
-        "I learned HTML by building my first websites, focusing on structure and semantics. The satisfaction of creating visually appealing layouts fueled my passion for web development.",
-    },
-    {
-      name: "CSS",
-      description:
-        "CSS styles web pages and enhances visual aesthetics. I enjoy experimenting with frameworks like Tailwind CSS to improve design efficiency and create responsive layouts.",
-    },
-    {
-      name: "JavaScript",
-      description:
-        "JavaScript enables dynamic content and interactive web applications. I love tackling online coding challenges that improve my understanding of programming concepts and enhance user experiences.",
-    },
-    {
-      name: "PHP",
-      description:
-        "PHP was my introduction to server-side scripting. Developing dynamic web pages reinforced my understanding of how backend systems interact with front-end technologies.",
-    },
-    {
-      name: "SQL",
-      description:
-        "I learned SQL to manage and query relational databases effectively. Engaging with online challenges has strengthened my skills in data manipulation and analysis.",
-    },
-    {
-      name: "React",
-      description:
-        "I embraced React for its component-based architecture, allowing me to build scalable applications. Learning through projects has deepened my appreciation for clean, maintainable code.",
-    },
-    {
-      name: "Node.js",
-      description:
-        "Node.js opened the door to backend development for me. Building RESTful APIs and server-side applications sparked my interest in full-stack development, encouraging me to solve real-world problems.",
-    },
-    {
-      name: "MongoDB",
-      description:
-        "I explored MongoDB while integrating it with my Node.js applications. The flexibility of a NoSQL database inspired me to create dynamic applications that adapt to user needs.",
-    },
-    {
-      name: "Tailwind CSS",
-      description:
-        "Tailwind CSS revolutionized my approach to styling. Its utility-first approach allows for rapid prototyping and customization, making design both efficient and enjoyable.",
-    },
-    {
-      name: "Git",
-      description:
-        "I use Git for version control to manage my projects efficiently. Understanding branching, merging, and collaborating with others through platforms like GitHub has significantly enhanced my workflow.",
-    },
+    { name: "JavaScript", icon: Code },
+    { name: "TypeScript", icon: Code },
+    { name: "C++", icon: Code },
+    { name: "C", icon: Code },
+    { name: "Java", icon: Code },
+    { name: "HTML", icon: Globe },
+    { name: "CSS", icon: Palette },
+    { name: "SQL", icon: Database },
+    { name: "React.js", icon: Zap },
+    { name: "Next.js", icon: Zap },
+    { name: "Node.js", icon: Server },
+    { name: "Express.js", icon: Server },
+    { name: "Tailwind CSS", icon: Palette },
+    { name: "Bootstrap", icon: Palette },
+    { name: "shadcn/ui", icon: Palette },
+    { name: "Socket.IO", icon: Zap },
+    { name: "MongoDB", icon: Database },
+    { name: "MySQL", icon: Database },
+    { name: "PostgreSQL", icon: Database },
+    { name: "Redis", icon: Database },
+    { name: "Git", icon: GitBranch },
+    { name: "GitHub", icon: GitBranch },
+    { name: "VS Code", icon: FileText },
+    { name: "Postman", icon: FileText },
+    { name: "AWS", icon: Server },
+    { name: "Firebase", icon: Server },
+    { name: "Docker", icon: Server },
+    { name: "Figma", icon: Palette },
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 px-6 lg:px-24">
-      <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-lg p-10">
-        <h1 className="text-5xl font-bold text-gray-800 mb-8 text-center">
-          Skills
-        </h1>
+    <div className="min-h-screen bg-black relative overflow-hidden pt-20">
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-800/20 via-gray-900/20 to-black/20 animate-pulse"></div>
+      
+      <div className="relative z-10 p-8 max-w-6xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl font-bold text-white mb-12 text-center"
+        >
+          Technical Skills
+        </motion.h1>
 
-        <div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 max-w-7xl mx-auto">
           {skills.map((skill, index) => (
-            <SkillBar
+            <SkillCard
               key={index}
               skill={skill.name}
-              description={skill.description}
+              icon={skill.icon}
+              index={index}
             />
           ))}
         </div>
